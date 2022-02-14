@@ -1,6 +1,6 @@
 const path = require('path');
 
-const errorCodesPath = path.resolve(__dirname, './docs/public/static/error-codes.json');
+//const errorCodesPath = path.resolve(__dirname, './docs/public/static/error-codes.json');
 const missingError = process.env.MUI_EXTRACT_ERROR_CODES === 'true' ? 'write' : 'annotate';
 
 function resolveAliasPath(relativeToBabelConf) {
@@ -10,18 +10,7 @@ function resolveAliasPath(relativeToBabelConf) {
 
 const defaultAlias = {
   '@mui/material': resolveAliasPath('./packages/mui-material/src'),
-  '@mui/docs': resolveAliasPath('./packages/mui-docs/src'),
-  '@mui/icons-material': resolveAliasPath('./packages/mui-icons-material/lib'),
-  '@mui/lab': resolveAliasPath('./packages/mui-lab/src'),
-  '@mui/styled-engine': resolveAliasPath('./packages/mui-styled-engine/src'),
-  '@mui/styled-engine-sc': resolveAliasPath('./packages/mui-styled-engine-sc/src'),
-  '@mui/styles': resolveAliasPath('./packages/mui-styles/src'),
-  '@mui/system': resolveAliasPath('./packages/mui-system/src'),
-  '@mui/private-theming': resolveAliasPath('./packages/mui-private-theming/src'),
-  '@mui/base': resolveAliasPath('./packages/mui-base/src'),
   '@mui/utils': resolveAliasPath('./packages/mui-utils/src'),
-  '@mui/material-next': resolveAliasPath('./packages/mui-material-next/src'),
-  '@mui/joy': resolveAliasPath('./packages/mui-joy/src'),
 };
 
 const productionPlugins = [
@@ -56,7 +45,6 @@ module.exports = function getBabelConfig(api) {
       'babel-plugin-macros',
       {
         muiError: {
-          errorCodesPath,
           missingError,
         },
       },
@@ -130,8 +118,6 @@ module.exports = function getBabelConfig(api) {
             {
               alias: {
                 ...defaultAlias,
-                modules: './modules',
-                'typescript-to-proptypes': './packages/typescript-to-proptypes/src',
               },
               root: ['./'],
             },

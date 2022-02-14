@@ -35,22 +35,22 @@ function rewriteImportPath(importPath) {
 async function main() {
   const packageRoot = process.cwd();
 
-  const tsconfigPath = path.join(packageRoot, 'tsconfig.build.json');
-  if (!fse.existsSync(tsconfigPath)) {
-    throw new Error(
-      'Unable to find a tsconfig to build this project. ' +
-        `The package root needs to contain a 'tsconfig.build.json'. ` +
-        `The package root is '${packageRoot}'`,
-    );
-  }
+  // const tsconfigPath = path.join(packageRoot, 'tsconfig.build.json');
+  // if (!fse.existsSync(tsconfigPath)) {
+  //   throw new Error(
+  //     'Unable to find a tsconfig to build this project. ' +
+  //       `The package root needs to contain a 'tsconfig.build.json'. ` +
+  //       `The package root is '${packageRoot}'`,
+  //   );
+  // }
 
-  await exec(['yarn', 'tsc', '-b', tsconfigPath].join(' '));
+  // await exec(['yarn', 'tsc', '-b', tsconfigPath].join(' '));
 
   const publishDir = path.join(packageRoot, 'build');
-  const declarationFiles = await glob('**/*.d.ts', { absolute: true, cwd: publishDir });
-  if (declarationFiles.length === 0) {
-    throw new Error(`Unable to find declaration files in '${publishDir}'`);
-  }
+  // const declarationFiles = await glob('**/*.d.ts', { absolute: true, cwd: publishDir });
+  // if (declarationFiles.length === 0) {
+  //   throw new Error(`Unable to find declaration files in '${publishDir}'`);
+  // }
 
   async function rewriteImportPaths(declarationFile) {
     const code = await fse.readFile(declarationFile, { encoding: 'utf8' });
@@ -105,28 +105,31 @@ async function main() {
 
   let rewrittenTally = 0;
   let errorTally = 0;
-  await Promise.all(
-    declarationFiles.map(async (declarationFile) => {
-      try {
-        const rewrites = await rewriteImportPaths(declarationFile, publishDir);
-        if (rewrites.length > 0) {
-          // eslint-disable-next-line no-console -- Verbose logging
-          console.log(`${chalk.bgYellow`FIXED`} '${declarationFile}':\n${rewrites.join('\n')}`);
-          rewrittenTally += 1;
-        } else {
-          // eslint-disable-next-line no-console -- Verbose logging
-          console.log(`${chalk.bgGreen`OK`} '${declarationFile}'`);
-        }
-      } catch (error) {
-        console.error(error);
-        errorTally += 1;
-        process.exitCode = 1;
-      }
-    }),
-  );
+  // await Promise.all(
+  //   declarationFiles.map(async (declarationFile) => {
+  //     try {
+  //       const rewrites = await rewriteImportPaths(declarationFile, publishDir);
+  //       if (rewrites.length > 0) {
+  //         // eslint-disable-next-line no-console -- Verbose logging
+  //         console.log(`${chalk.bgYellow`FIXED`} '${declarationFile}':\n${rewrites.join('\n')}`);
+  //         rewrittenTally += 1;
+  //       } else {
+  //         // eslint-disable-next-line no-console -- Verbose logging
+  //         console.log(`${chalk.bgGreen`OK`} '${declarationFile}'`);
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //       errorTally += 1;
+  //       process.exitCode = 1;
+  //     }
+  //   }),
+  // );
 
+  //${declarationFiles.length}
   // eslint-disable-next-line no-console -- Verbose logging
-  console.log(`Fixed: ${rewrittenTally}\nFailed: ${errorTally}\nTotal: ${declarationFiles.length}`);
+  // console.log(`Fixed: ${rewrittenTally}\nFailed: ${errorTally}\nTotal:
+
+  // `);
 }
 
 yargs

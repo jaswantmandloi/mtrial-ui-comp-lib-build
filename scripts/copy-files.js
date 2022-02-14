@@ -43,20 +43,24 @@ async function createModulePackages({ from, to }) {
         main: topLevelPathImportsAreCommonJSModules
           ? './index.js'
           : path.posix.join('../node', directoryPackage, 'index.js'),
-        types: './index.d.ts',
+        //types: './index.d.ts',
       };
 
-      const [typingsEntryExist, moduleEntryExists, mainEntryExists] = await Promise.all([
-        fse.pathExists(path.resolve(path.dirname(packageJsonPath), packageJson.types)),
+      const [
+        //typingsEntryExist,
+        moduleEntryExists,
+        mainEntryExists,
+      ] = await Promise.all([
+        //fse.pathExists(path.resolve(path.dirname(packageJsonPath), packageJson.types)),
         fse.pathExists(path.resolve(path.dirname(packageJsonPath), packageJson.module)),
         fse.pathExists(path.resolve(path.dirname(packageJsonPath), packageJson.main)),
         fse.writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2)),
       ]);
 
       const manifestErrorMessages = [];
-      if (!typingsEntryExist) {
-        manifestErrorMessages.push(`'types' entry '${packageJson.types}' does not exist`);
-      }
+      // if (!typingsEntryExist) {
+      //   manifestErrorMessages.push(`'types' entry '${packageJson.types}' does not exist`);
+      // }
       if (!moduleEntryExists) {
         manifestErrorMessages.push(`'module' entry '${packageJson.module}' does not exist`);
       }
@@ -102,7 +106,7 @@ async function createPackageFile() {
             : './index.js',
         }
       : {}),
-    types: './index.d.ts',
+    //types: './index.d.ts',
   };
 
   const targetPath = path.resolve(buildPath, './package.json');
@@ -154,16 +158,16 @@ async function run() {
     await Promise.all(
       [
         // use enhanced readme from workspace root for `@mui/material`
-        packageData.name === '@mui/material' ? '../../README.md' : './README.md',
-        '../../CHANGELOG.md',
-        '../../LICENSE',
+        //packageData.name === '@mui/material' ? '../../README.md' : './README.md',
+        //'../../CHANGELOG.md',
+        //'../../LICENSE',
       ].map((file) => includeFileInBuild(file)),
     );
 
     await addLicense(packageData);
 
     // TypeScript
-    await typescriptCopy({ from: srcPath, to: buildPath });
+    //await typescriptCopy({ from: srcPath, to: buildPath });
 
     await createModulePackages({ from: srcPath, to: buildPath });
   } catch (err) {
