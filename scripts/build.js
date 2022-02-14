@@ -91,7 +91,7 @@ async function run(argv) {
   }
 
   const { stderr, stdout } = await exec(command, { env: { ...process.env, ...env } });
-  console.log({ stderr, stdout });
+  //console.log({ stderr, stdout });
   if (stderr) {
     throw new Error(`'${command}' failed with \n${stderr}`);
   }
