@@ -9,12 +9,11 @@ function resolveAliasPath(relativeToBabelConf) {
 }
 
 const defaultAlias = {
-  '@mui/material': resolveAliasPath('./packages/mui-material/src'),
-  '@mui/utils': resolveAliasPath('./packages/mui-utils/src'),
+  'my-ui': resolveAliasPath('./src'),
 };
 
 const productionPlugins = [
-  ['babel-plugin-react-remove-properties', { properties: ['data-mui-test'] }],
+  ['babel-plugin-react-remove-properties', { properties: ['data-temp-test'] }],
 ];
 
 module.exports = function getBabelConfig(api) {

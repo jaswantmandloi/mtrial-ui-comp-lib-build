@@ -1,7 +1,7 @@
 //import { promises as fs, existsSync } from 'fs';
-import path from 'path';
-import zlib from 'zlib';
-import { promisify } from 'util';
+// import path from 'path';
+// import zlib from 'zlib';
+// import { promisify } from 'util';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
@@ -9,9 +9,12 @@ import replace from '@rollup/plugin-replace';
 import nodeGlobals from 'rollup-plugin-node-globals';
 import { terser } from 'rollup-plugin-terser';
 
-const gzip = promisify(zlib.gzip);
-
-const input = 'src/index.js';
+//const gzip = promisify(zlib.gzip);
+const rootPath = String(__dirname).replace('scripts', '');
+const input = `${rootPath}src/index.js`;
+const buildPath = `${rootPath}build`;
+// const nodeModulesPath = `${rootPath}/node_modules`;
+// console.log({ input, buildPath });
 const globals = {
   react: 'React',
   'react-dom': 'ReactDOM',
@@ -21,22 +24,16 @@ const babelOptions = {
   // We are using @babel/plugin-transform-runtime
   runtimeHelpers: true,
   extensions: ['.js', '.ts', '.tsx'],
-  configFile: path.resolve(__dirname, '../../../babel.config.js'),
+  configFile: `${rootPath}babel.config.js`,
+  //path.resolve(__dirname, '../babel.config.js'),
 };
 const commonjsOptions = {
   ignoreGlobal: true,
   include: /node_modules/,
   namedExports: {
-    '../../node_modules/prop-types/index.js': [
-      'elementType',
-      'bool',
-      'func',
-      'object',
-      'oneOfType',
-      'element',
-    ],
-    '../../node_modules/react/jsx-runtime.js': ['jsx', 'jsxs'],
-    '../../node_modules/react-is/index.js': [
+    'prop-types/index.js': ['elementType', 'bool', 'func', 'object', 'oneOfType', 'element'],
+    'react/jsx-runtime': ['jsx', 'jsxs'],
+    'react-is/index.js': [
       'ForwardRef',
       'isFragment',
       'isLazy',
@@ -64,7 +61,8 @@ function onwarn(warning) {
     // it to a warning as a reminder to fix at some point
     console.warn(warning.message);
   } else {
-    throw Error(warning.message);
+    //throw Error(warning.message);
+    console.log({ error: warning.message });
   }
 }
 
@@ -73,7 +71,7 @@ export default [
     input,
     onwarn,
     output: {
-      file: 'build/umd/material-ui.development.js',
+      file: `${buildPath}/umd/material-ui.development.js`,
       format: 'umd',
       name: 'MaterialUI',
       globals,
@@ -91,7 +89,7 @@ export default [
     input,
     onwarn,
     output: {
-      file: 'build/umd/material-ui.production.min.js',
+      file: `${buildPath}/umd/material-ui.production.min.js`,
       format: 'umd',
       name: 'MaterialUI',
       globals,
