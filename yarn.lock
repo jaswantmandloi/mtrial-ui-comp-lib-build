@@ -1052,6 +1052,7 @@
     "to-fast-properties" "^2.0.0"
 
 "@definitelytyped/header-parser@latest":
+  "integrity" "sha512-UJ6WCqR4erfka35umvTyOC+dsVPZydv+CcNHW74di3QAdY89DOOx2IVsbUizNvRNPKR7FKP9noIEjNYd6vzZEw=="
   "version" "0.0.104"
   dependencies:
     "@definitelytyped/typescript-versions" "^0.0.104"
@@ -1064,6 +1065,7 @@
   "version" "0.0.104"
 
 "@definitelytyped/utils@latest":
+  "integrity" "sha512-abfVggmE57SVaK5SzRIeydrrNF73hdUJ/jnBvnegRcnKD8j4GtkLQ3DkE7mHBp2UP1dDTrSBbER/CgUfmFtCSA=="
   "version" "0.0.104"
   dependencies:
     "@definitelytyped/typescript-versions" "^0.0.104"
@@ -3846,6 +3848,7 @@
     "is-obj" "^2.0.0"
 
 "dts-critic@latest":
+  "integrity" "sha512-HMO2f9AO7ge44YO8OK18f+cxm/IaE1CFuyNFbfJRCEbyazWj5X5wWDF6W4CGdo5Ax0ILYVfJ7L/rOwuUN1fzWw=="
   "version" "3.3.11"
   dependencies:
     "@definitelytyped/header-parser" "latest"
@@ -6901,6 +6904,7 @@
     "minimist" "^1.2.5"
 
 "mocha@>= 2":
+  "integrity" "sha512-kNn7E8g2SzVcq0a77dkphPsDSN7P+iYkqE0ZsGCYWRsoiKjOt+NvXfaagik8vuDa6W5Zw3qxe8Jfpt5qKf+6/Q=="
   "version" "9.2.0"
   dependencies:
     "@ungap/promise-all-settled" "1.1.2"
@@ -8407,6 +8411,11 @@
     "resolve" "^1.11.1"
     "rollup-pluginutils" "^2.8.1"
 
+"rollup-plugin-peer-deps-external@^2.2.4":
+  "integrity" "sha512-AWdukIM1+k5JDdAqV/Cxd+nejvno2FVLVeZ74NKggm3Q5s9cbbcOgUPGdbxPi4BXu7xGaZ8HG12F+thImYu/0g=="
+  "resolved" "https://registry.npmjs.org/rollup-plugin-peer-deps-external/-/rollup-plugin-peer-deps-external-2.2.4.tgz"
+  "version" "2.2.4"
+
 "rollup-plugin-terser@^7.0.2":
   "integrity" "sha512-w3iIaU4OxcF52UUXiZNsNeuXIMDvFrr+ZXK6bFZ0Q60qyVfq4uLptoS4bbq3paG3x216eQllFZX7zt6TIImguQ=="
   "resolved" "https://registry.npmjs.org/rollup-plugin-terser/-/rollup-plugin-terser-7.0.2.tgz"
@@ -8424,7 +8433,7 @@
   dependencies:
     "estree-walker" "^0.6.1"
 
-"rollup@^1.20.0 || ^2.0.0", "rollup@^1.20.0||^2.0.0", "rollup@^2.0.0", "rollup@^2.66.1", "rollup@>=0.60.0 <3", "rollup@>=1.11.0", "rollup@>=1.12.0":
+"rollup@*", "rollup@^1.20.0 || ^2.0.0", "rollup@^1.20.0||^2.0.0", "rollup@^2.0.0", "rollup@^2.66.1", "rollup@>=0.60.0 <3", "rollup@>=1.11.0", "rollup@>=1.12.0":
   "integrity" "sha512-hoEiBWwZtf1QdK3jZIq59L0FJj4Fiv4RplCO4pvCRC86qsoFurWB4hKQIjoRf3WvJmk5UZ9b0y5ton+62fC7Tw=="
   "resolved" "https://registry.npmjs.org/rollup/-/rollup-2.67.2.tgz"
   "version" "2.67.2"

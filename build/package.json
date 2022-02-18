@@ -1,5 +1,5 @@
 {
-  "version": "5.4.0",
+  "version": "1.0.0",
   "private": false,
   "peerDependencies": {
     "react": "^17.0.0",
